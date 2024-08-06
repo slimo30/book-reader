@@ -4,14 +4,10 @@ import 'package:flutter/services.dart';
 // you can use any class from flutter/services
 
 class AppServices {
-  static const platform = MethodChannel('flutter.dev/connectivity');
+  static const MethodChannel _channel = MethodChannel('samples.flutter.dev/');
 
   static Future<bool> checkConnectivity() async {
-    try {
-      final result = await platform.invokeMethod<int>('checkConnectivity');
-      return result as bool;
-    } on PlatformException catch (e) {
-      rethrow;
-    }
+    final bool isOnline = await _channel.invokeMethod('checkConnectivity');
+    return isOnline;
   }
 }

@@ -4,6 +4,7 @@ part of 'ref.dart';
 class MyState with _$MyState {
   const MyState._();
 
+
   factory MyState({
     required List<MyModel> myModelList,
     bool? isLoading,

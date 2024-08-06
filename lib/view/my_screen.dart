@@ -1,91 +1,120 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meduim_challenge/provider/my_provider.dart';
 import 'package:meduim_challenge/models/mymodel.dart';
+import 'package:meduim_challenge/provider/ref.dart';
+import 'package:meduim_challenge/view/details_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyScreen extends ConsumerWidget {
   const MyScreen({super.key});
 
-  // You must get the list from the provider and display is here , and also you must check the loading state and display a loading indicator if the state is loading
-  // also isConnected state must be checked and display a message if there is no internet connection
-  // make sure that u dont use any state management package other than riverpod
-  // make sure that u dont send http request every time the screen is changed
-
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(myNotifierProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('MyBooks App'),
+        backgroundColor: Colors.teal,
       ),
-      // body: ListView.builder(
-      //   itemCount: myList.length,
-      //   itemBuilder: (context, index) {
-      //     final item = myList[index];
-      //     return ListTile(
-      //       onTap: () => Navigator.of(context).pushNamed(
-      //         DetailsScreen.routeName,
-      //         arguments: {
-      //           'volumeInfo': item.volumeInfo,
-      //           'kind': item.kind,
-      //         },
-      //       ),
-      //       title: Text(item.volumeInfo.title),
-      //       subtitle: Text(item.kind),
-      //     );
-      //   },
-      // ),
+      body: state.isLoading!
+          ? const Center(child: CircularProgressIndicator())
+          : !state.isConnected!
+              ? const Center(
+                  child: Text('No internet connection',
+                      style: TextStyle(color: Colors.red)))
+              : ListView.builder(
+                  itemCount: state.myModelList.length,
+                  itemBuilder: (context, index) {
+                    final item = state.myModelList[index];
+                    return Card(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 16),
+                      elevation: 4,
+                      child: ListTile(
+                        onTap: () => Navigator.of(context).pushNamed(
+                          DetailsScreen.routeName,
+                          arguments: item,
+                        ),
+                        title: Text(item.volumeInfo.title,
+                            style: Theme.of(context).textTheme.headline6),
+                        subtitle: Text(item.id),
+                        contentPadding: const EdgeInsets.all(16),
+                      ),
+                    );
+                  },
+                ),
     );
   }
 }
 
-class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
-  static const routeName = '/details';
+class MyHomePage extends ConsumerStatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends ConsumerState<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      ref
+          .read(myNotifierProvider.notifier)
+          .mapEventsToStates(MyEvent.fetchData());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final MyModel myModel =
-        ModalRoute.of(context)!.settings.arguments as MyModel;
-    ;
+    final state = ref.watch(myNotifierProvider);
+
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Details Screen'),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image.asset(
-                myModel.volumeInfo.imageLinks?.thumbnail ?? '',
-                height: 400,
-                width: 500,
-                fit: BoxFit.contain,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(myModel.volumeInfo.title),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(myModel.kind),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(myModel.volumeInfo.description ?? 'No description'),
-              const SizedBox(
-                height: 20,
-              ),
-              Center(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        launchUrl(Uri.parse(myModel.volumeInfo.imageLinks!
-                            .accessInfo!.webReaderLink!));
-                      },
-                      child: const Text("Read"))),
-            ],
-          ),
-        ));
+      appBar: AppBar(
+        title: const Text('My App'),
+        backgroundColor: Colors.teal,
+      ),
+      body: Center(
+        child: state.isLoading!
+            ? const CircularProgressIndicator()
+            : state.isConnected!
+                ? ListView.builder(
+                    itemCount: state.myModelList.length,
+                    itemBuilder: (context, index) {
+                      final item = state.myModelList[index];
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 16),
+                        elevation: 4,
+                        child: ListTile(
+                          title: Text(item.volumeInfo.title,
+                              style: Theme.of(context).textTheme.headline6),
+                          subtitle: Text(item.id),
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              DetailsScreen.routeName,
+                              arguments: item,
+                            );
+                          },
+                          contentPadding: const EdgeInsets.all(16),
+                        ),
+                      );
+                    },
+                  )
+                : const Text('No data available or no connectivity',
+                    style: TextStyle(color: Colors.red)),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ref
+              .read(myNotifierProvider.notifier)
+              .mapEventsToStates(MyEvent.fetchData());
+        },
+        child: const Icon(Icons.refresh),
+        backgroundColor: Colors.teal,
+      ),
+    );
   }
 }

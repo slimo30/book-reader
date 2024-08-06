@@ -6,20 +6,46 @@ import 'package:meduim_challenge/utils/services.dart';
 
 import '../models/mymodel.dart';
 
-part 'my_state.dart';
 part 'my_event.dart';
-
+part 'my_state.dart';
 part 'ref.freezed.dart';
 
 class MyRef extends StateNotifier<MyState> {
   MyRef() : super(MyState.empty());
 
-  mapEventsToStates(MyEvent event) async {
-    // Complete this function
-    // u must check the internet connection and get the data from the domain and update the state
+  Future<void> mapEventsToStates(MyEvent event) async {
+    await event.when(
+      fetchData: () async {
+        final isConnected = await AppServices.checkConnectivity();
 
-    return event.whenOrNull();
+        if (isConnected) {
+          state = state.copyWith(isLoading: true);
+
+          try {
+            print("true");
+
+            final data = await MyDomain.getData();
+            print(data.toString());
+            print("true 2");
+
+            state = state.copyWith(
+              myModelList: data,
+              isLoading: false,
+              isConnected: true,
+            );
+          } catch (e) {
+            state = state.copyWith(
+              isLoading: false,
+              isConnected: false,
+            );
+          }
+        } else {
+          state = state.copyWith(
+            isLoading: false,
+            isConnected: false,
+          );
+        }
+      },
+    );
   }
 }
-
-

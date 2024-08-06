@@ -1,33 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:meduim_challenge/provider/ref.dart';
-import 'package:meduim_challenge/view/my_screen.dart' as my_screen;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meduim_challenge/view/details_screen.dart';
+import 'package:meduim_challenge/view/my_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'My App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
       routes: {
-        my_screen.DetailsScreen.routeName: (_) =>
-            const my_screen.DetailsScreen(),
+        DetailsScreen.routeName: (context) => const DetailsScreen(),
       },
-      title: 'MY APP',
-      home: const MyScreen(),
     );
   }
 }

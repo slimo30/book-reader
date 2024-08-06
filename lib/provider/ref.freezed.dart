@@ -15,6 +15,155 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
+mixin _$MyEvent {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetchData,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? fetchData,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetchData,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchData value) fetchData,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchData value)? fetchData,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchData value)? fetchData,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MyEventCopyWith<$Res> {
+  factory $MyEventCopyWith(MyEvent value, $Res Function(MyEvent) then) =
+      _$MyEventCopyWithImpl<$Res, MyEvent>;
+}
+
+/// @nodoc
+class _$MyEventCopyWithImpl<$Res, $Val extends MyEvent>
+    implements $MyEventCopyWith<$Res> {
+  _$MyEventCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$FetchDataImplCopyWith<$Res> {
+  factory _$$FetchDataImplCopyWith(
+          _$FetchDataImpl value, $Res Function(_$FetchDataImpl) then) =
+      __$$FetchDataImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FetchDataImplCopyWithImpl<$Res>
+    extends _$MyEventCopyWithImpl<$Res, _$FetchDataImpl>
+    implements _$$FetchDataImplCopyWith<$Res> {
+  __$$FetchDataImplCopyWithImpl(
+      _$FetchDataImpl _value, $Res Function(_$FetchDataImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FetchDataImpl implements _FetchData {
+  const _$FetchDataImpl();
+
+  @override
+  String toString() {
+    return 'MyEvent.fetchData()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FetchDataImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetchData,
+  }) {
+    return fetchData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? fetchData,
+  }) {
+    return fetchData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetchData,
+    required TResult orElse(),
+  }) {
+    if (fetchData != null) {
+      return fetchData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchData value) fetchData,
+  }) {
+    return fetchData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchData value)? fetchData,
+  }) {
+    return fetchData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchData value)? fetchData,
+    required TResult orElse(),
+  }) {
+    if (fetchData != null) {
+      return fetchData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchData implements MyEvent {
+  const factory _FetchData() = _$FetchDataImpl;
+}
+
+/// @nodoc
 mixin _$MyState {
   List<MyModel> get myModelList => throw _privateConstructorUsedError;
   bool? get isLoading => throw _privateConstructorUsedError;
@@ -180,162 +329,4 @@ abstract class _MyState extends MyState {
   @JsonKey(ignore: true)
   _$$MyStateImplCopyWith<_$MyStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-class MyScreen extends StatelessWidget {
-  const MyScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    throw UnimplementedError();
-  }
-}
-
-/// @nodoc
-mixin _$MyEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() fetchData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchData,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_FetchData value) fetchData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchData value)? fetchData,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchData value)? fetchData,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MyEventCopyWith<$Res> {
-  factory $MyEventCopyWith(MyEvent value, $Res Function(MyEvent) then) =
-      _$MyEventCopyWithImpl<$Res, MyEvent>;
-}
-
-/// @nodoc
-class _$MyEventCopyWithImpl<$Res, $Val extends MyEvent>
-    implements $MyEventCopyWith<$Res> {
-  _$MyEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$FetchDataImplCopyWith<$Res> {
-  factory _$$FetchDataImplCopyWith(
-          _$FetchDataImpl value, $Res Function(_$FetchDataImpl) then) =
-      __$$FetchDataImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$FetchDataImplCopyWithImpl<$Res>
-    extends _$MyEventCopyWithImpl<$Res, _$FetchDataImpl>
-    implements _$$FetchDataImplCopyWith<$Res> {
-  __$$FetchDataImplCopyWithImpl(
-      _$FetchDataImpl _value, $Res Function(_$FetchDataImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$FetchDataImpl implements _FetchData {
-  const _$FetchDataImpl();
-
-  @override
-  String toString() {
-    return 'MyEvent.fetchData()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchDataImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() fetchData,
-  }) {
-    return fetchData();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchData,
-  }) {
-    return fetchData?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchData,
-    required TResult orElse(),
-  }) {
-    if (fetchData != null) {
-      return fetchData();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_FetchData value) fetchData,
-  }) {
-    return fetchData(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchData value)? fetchData,
-  }) {
-    return fetchData?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchData value)? fetchData,
-    required TResult orElse(),
-  }) {
-    if (fetchData != null) {
-      return fetchData(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FetchData implements MyEvent {
-  const factory _FetchData() = _$FetchDataImpl;
 }
