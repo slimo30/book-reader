@@ -6,49 +6,6 @@ import 'package:meduim_challenge/provider/ref.dart';
 import 'package:meduim_challenge/view/details_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MyScreen extends ConsumerWidget {
-  const MyScreen({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(myNotifierProvider);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('MyBooks App'),
-        backgroundColor: Colors.teal,
-      ),
-      body: state.isLoading!
-          ? const Center(child: CircularProgressIndicator())
-          : !state.isConnected!
-              ? const Center(
-                  child: Text('No internet connection',
-                      style: TextStyle(color: Colors.red)))
-              : ListView.builder(
-                  itemCount: state.myModelList.length,
-                  itemBuilder: (context, index) {
-                    final item = state.myModelList[index];
-                    return Card(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 16),
-                      elevation: 4,
-                      child: ListTile(
-                        onTap: () => Navigator.of(context).pushNamed(
-                          DetailsScreen.routeName,
-                          arguments: item,
-                        ),
-                        title: Text(item.volumeInfo.title,
-                            style: Theme.of(context).textTheme.headline6),
-                        subtitle: Text(item.id),
-                        contentPadding: const EdgeInsets.all(16),
-                      ),
-                    );
-                  },
-                ),
-    );
-  }
-}
-
 class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({super.key});
 
@@ -118,3 +75,46 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     );
   }
 }
+
+// class MyScreen extends ConsumerWidget {
+//   const MyScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final state = ref.watch(myNotifierProvider);
+
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('MyBooks App'),
+//         backgroundColor: Colors.teal,
+//       ),
+//       body: state.isLoading!
+//           ? const Center(child: CircularProgressIndicator())
+//           : !state.isConnected!
+//               ? const Center(
+//                   child: Text('No internet connection',
+//                       style: TextStyle(color: Colors.red)))
+//               : ListView.builder(
+//                   itemCount: state.myModelList.length,
+//                   itemBuilder: (context, index) {
+//                     final item = state.myModelList[index];
+//                     return Card(
+//                       margin: const EdgeInsets.symmetric(
+//                           vertical: 8, horizontal: 16),
+//                       elevation: 4,
+//                       child: ListTile(
+//                         onTap: () => Navigator.of(context).pushNamed(
+//                           DetailsScreen.routeName,
+//                           arguments: item,
+//                         ),
+//                         title: Text(item.volumeInfo.title,
+//                             style: Theme.of(context).textTheme.headline6),
+//                         subtitle: Text(item.id),
+//                         contentPadding: const EdgeInsets.all(16),
+//                       ),
+//                     );
+//                   },
+//                 ),
+//     );
+//   }
+// }
